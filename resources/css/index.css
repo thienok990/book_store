@@ -1,0 +1,337 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.product-card {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: scale(1.02);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    padding: 1rem;
+}
+
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1;
+}
+
+.product-title {
+    font-weight: 500;
+}
+
+.footer {
+    background-color: #212529;
+    color: #ccc;
+    padding: 3rem 0;
+}
+
+.footer a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.star-rating {
+    color: gold;
+    font-size: 0.9rem;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.cart-container {
+    margin-top: 50px;
+}
+
+.cart-item img {
+    width: 80px;
+}
+
+.step {
+    font-weight: 500;
+}
+
+.step.active {
+    color: #000;
+}
+
+.step:not(:last-child)::after {
+    content: ">";
+    margin: 0 10px;
+}
+
+.item-img {
+    width: 80px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.shipping-option {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Border xanh khi radio được chọn */
+.shipping-radio:checked + .shipping-option {
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Đảm bảo dropdown có chiều rộng đúng */
+.dropdown-menu {
+    min-width: 150px; /* Đặt chiều rộng tối thiểu cho dropdown */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1050;
+    background-color: white;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-item {
+    padding: 0.375rem 1.25rem;
+    color: #212529;
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+/* navbar.css */
+
+/* Giữ navbar không bị giãn ngang */
+.navbar-actions {
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.search-form {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.search-form .input-group input {
+    max-width: 200px;
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 1.4rem;
+}
+
+.user-dropdown {
+    max-width: 50px;
+    overflow: hidden;
+}
+
+.user-dropdown .btn {
+    padding: 0.375rem 0.75rem;
+}
+
+/* Responsive nhỏ hơn 768px */
+@media (max-width: 767.98px) {
+    .search-form .input-group input {
+        max-width: 150px;
+    }
+
+    .navbar-actions {
+        gap: 1rem;
+    }
+}
+
+/* Navbar brand luôn căn giữa */
+.navbar-brand {
+    flex-grow: 1;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+/* Container của form */
+.profile-form {
+    max-width: 600px; /* Không cho form rộng quá */
+    margin: 0 auto; /* Căn giữa */
+    padding: 20px; /* Khoảng cách bên trong vừa phải */
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* Các trường input */
+.profile-form input[type="text"],
+.profile-form input[type="email"],
+.profile-form select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 12px; /* Khoảng cách nhỏ giữa các trường */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Label hoặc tiêu đề nhỏ */
+.profile-form label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Radio button */
+.profile-form .gender-group {
+    margin-bottom: 12px;
+}
+
+/* Button Lưu */
+.profile-form button.save-btn {
+    background-color: #ee4d2d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.profile-form button.save-btn:hover {
+    background-color: #d43d1a;
+}
+/* Group chứa giới tính */
+.gender-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa các radio */
+    margin-bottom: 12px;
+}
+
+/* Group chứa ngày sinh */
+.birthday-group {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các select */
+    margin-bottom: 12px;
+}
+
+.birthday-group select {
+    flex: 1; /* Các select sẽ đều nhau */
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Nếu muốn các radio nút nhỏ gọn hơn */
+.gender-group input[type="radio"] {
+    margin: 0;
+}
+.gender-group label {
+    margin-right: 15px;
+    font-size: 14px;
+}
+.sidebar {
+    background-color: white;
+    height: 80vh;
+    padding: 1rem;
+    border-right: 1px solid #dee2e6;
+}
+.sidebar h5 {
+    margin-top: 1rem;
+}
+.profile-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.form-label {
+    font-weight: 500;
+}
+.product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+.product-title {
+    font-weight: 500;
+}
+.price-original {
+    text-decoration: line-through;
+    color: #999;
+}
+.price-discount {
+    color: #ee4d2d;
+    font-weight: bold;
+}
+.btn-orange {
+    background-color: #ee4d2d;
+    color: white;
+}
+.btn-orange:hover {
+    background-color: #d8431e;
+}
+.order-status {
+    color: #20c997;
+    font-weight: 500;
+}
+.order-item img {
+    width: 80px; /* hoặc 100px tùy theo bố cục mong muốn */
+    height: 100px; /* hoặc auto nếu muốn giữ tỷ lệ */
+    object-fit: cover; /* giúp ảnh không bị méo */
+    border-radius: 4px; /* tùy chọn: bo góc ảnh cho đẹp hơn */
+}
+
+textarea {
+    height: 160px;
+}
+@media (max-width: 576px) {
+    .dropdown-menu {
+        width: 100vw;
+        left: 0 !important;
+        right: 0 !important;
+    }
+}

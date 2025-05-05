@@ -1,0 +1,124 @@
+/* General card styling */
+.card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Cart Item Styling */
+.cart-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Product image styling */
+.item-img {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Quantity input styling */
+.quantity {
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Price styling */
+.price {
+    color: #888;
+}
+
+/* Trash button */
+.btnDelete {
+    border-radius: 6px;
+}
+
+/* Place Order button */
+#btn {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+#btn:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive padding for container */
+.container {
+    max-width: 1200px;
+}
+
+/* Improve spacing on mobile */
+@media (max-width: 576px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .cart-item .form-control {
+        margin-top: 10px;
+    }
+}
+/* Cart Item Container */
+.cart-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Checkbox styling - make same size and aligned */
+.cart-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 15px;
+}
+
+/* Product image */
+.item-img {
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Product info container */
+.cart-item .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Quantity input styling */
+.quantity {
+    width: 60px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 10px;
+}
+
+/* Make sure quantity and buttons align vertically center */
+.cart-item .d-flex.align-items-center {
+    align-items: center;
+}
+
+/* Trash button */
+.btnDelete {
+    border-radius: 6px;
+}
