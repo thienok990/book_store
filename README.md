@@ -16,7 +16,7 @@ Node.js & npm (nếu dùng Laravel Mix hoặc Vite)
 
 🚀 Cài đặt
 
-git clone https://github.com/ten-cua-ban/bookstore-laravel.git
+git clone https://github.com/thienok990/book_store
 cd bookstore-laravel
 composer install
 cp .env.example .env
@@ -53,8 +53,8 @@ Truy cập: http://localhost:8000
 
 🧪 Tài khoản demo (nếu có seed dữ liệu)
 
-Email: admin@example.com
-Mật khẩu: password
+Email: admin@gmail.com
+Mật khẩu: admin
 
 🗂 File database (tùy chọn)
 
