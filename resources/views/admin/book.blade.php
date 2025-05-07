@@ -29,4 +29,8 @@
             </td>
         </tr>
     @endforeach
+   
+@endsection
+@section('content')
+{{ $books->appends(request()->query())->links('pagination::bootstrap-5') }}
 @endsection

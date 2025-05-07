@@ -20,3 +20,6 @@
         </tr>
     @endforeach
 @endsection
+@section('content')
+{{ $categories->appends(request()->query())->links('pagination::bootstrap-5') }}
+@endsection

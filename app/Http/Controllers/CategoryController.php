@@ -17,7 +17,7 @@ class CategoryController extends Controller
             ->leftJoin('book', 'category.id', '=', 'book.category_id')
             ->select('category.id', 'category.name', DB::raw('COUNT(book.id) as book_count'))
             ->groupBy('category.id', 'category.name')
-            ->get();
+            ->paginate(10);
         return view('admin.category', compact('categories'));
     }
 

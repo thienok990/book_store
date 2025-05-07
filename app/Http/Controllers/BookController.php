@@ -29,7 +29,7 @@ class BookController extends Controller
                 'book.img',
                 'author.name as author_name',
                 'category.name as category_name'
-            )->get();
+            )->paginate(8);
         $categories = Category::all();
         $authors = Author::all();
         return view('admin.book', compact('books', 'authors', 'categories'));

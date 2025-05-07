@@ -17,7 +17,7 @@ class AuthorController extends Controller
             ->leftJoin('book', 'author.id', '=', 'book.author_id')
             ->select('author.id', 'author.name', DB::raw('COUNT(book.id) as book_count'))
             ->groupBy('author.id', 'author.name')
-            ->get();
+            ->paginate(10);
         return view('admin.author', compact('authors'));
     }
 
