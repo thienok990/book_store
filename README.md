@@ -61,12 +61,18 @@ Mật khẩu: admin
 Nếu bạn không muốn chạy migrate & seed:
 
 mysql -u root -p your_database < database/database.sql
+
 🔑 Hướng dẫn sử dụng ảnh
+
+Sau khi clone repository và cài đặt dự án, hãy thực hiện các bước sau để tạo symlink cho ảnh:
+
 Nếu bạn sử dụng ảnh trong ứng dụng, các ảnh sẽ được lưu trong thư mục storage/app/public và được truy cập qua đường dẫn public/storage. Để đảm bảo ảnh hiển thị đúng sau khi clone repository, bạn cần tạo symlink.
-php artisan storage:link
 
 Tạo symlink cho ảnh
-Sau khi clone repository và cài đặt dự án, hãy thực hiện các bước sau để tạo symlink cho ảnh:
+
+php artisan storage:link
+
+
 
 🤝 Góp ý & liên hệ
 
