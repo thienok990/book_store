@@ -15,7 +15,7 @@ $(document).ready(function () {
 
         // Gửi yêu cầu AJAX để cập nhật số lượng trên server
         $.ajax({
-            url: "http://127.0.0.1:8000/cart/" + id,
+            url: "http://localhost:8000/cart/" + id,
             method: "PUT",
             data: {
                 quantity: val,
@@ -70,7 +70,7 @@ $(document).ready(function () {
         console.log(id); // Kiểm tra ID
 
         $.ajax({
-            url: "http://127.0.0.1:8000/cart/" + id, // Địa chỉ URL xóa
+            url: "http://localhost:8000/cart/" + id, // Địa chỉ URL xóa
             method: "DELETE", // Phương thức DELETE
             headers: {
                 "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content"), // Gửi CSRF token
