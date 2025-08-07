@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+book_storebook_storebook_store-- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
@@ -65,7 +65,7 @@ CREATE TABLE `book` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `book`
+-- Dumping data for table `book``user`
 --
 
 INSERT INTO `book` (`id`, `name`, `category_id`, `author_id`, `price`, `stock`, `description`, `img`) VALUES

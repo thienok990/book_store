@@ -169,8 +169,8 @@ class OrdersController extends Controller
     }
     public function indexAdmin()
     {
-        $oders = Orders::select('name', 'phone', 'address', 'total_price', 'status', 'id')->get();
-        return view('admin.order', compact('oders'));
+        $oders = Orders::select('name', 'phone', 'address', 'total_price', 'status', 'id')->paginate(8);
+        return view('admin.order.order', compact('oders'));
     }
     public function updateStatus(Request $request, $id)
     {

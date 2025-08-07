@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+
 class UserController extends Controller
 {
     /**
@@ -30,14 +33,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'fullName' => 'required',
-            'password' =>  'required'
+            'signUpEmail' => 'required|email:rfc,dns|unique:user,email',
+            'signUpname' => 'required|string|min:3|max:50',
+            'signUpPassword' => [
+                'required',
+                Password::min(6)
+                    ->mixedCase()   // Chữ hoa + thường
+                    ->numbers()     // Số   // Ký tự đặc biệt
+            ],
         ]);
         $user = User::create([
-            'email' => $request->email,
-            'name' => $request->fullName,
-            'password' => $request->password,
+            'email' => $request->signUpEmail,
+            'name' => $request->signUpname,
+            'password' => bcrypt($request->signUpPassword),
             'role' => 'customer'
         ]);
         Auth::login($user);
@@ -48,20 +56,24 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6'
+            'loginEmail' => 'required',
+            'loginPassword' => 'required'
         ]);
+        $user = User::where('email', $request->loginEmail)->first();
 
-        // Kiểm tra thông tin đăng nhập
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            session()->flash('success', 'Đăng nhập thành công!');
-            return redirect()->route('index.index');
+        if (!$user) {
+            return back()->withErrors([
+                'loginEmail' => 'Email không tồn tại.',
+            ])->withInput()->with('login', 'loginModal');
         }
-
-        // Nếu không thành công
-        return back()->withErrors([
-            'email' => 'Thông tin đăng nhập không đúng.',
-        ])->withInput();
+        if (!Hash::check($request->loginPassword, $user->password)) {
+            return back()->withErrors([
+                'loginPassword' => 'Mật khẩu không đúng.',
+            ])->withInput()->with('login', 'loginModal');
+        }
+        Auth::login($user);
+        session()->flash('success', 'Đăng nhập thành công!');
+        return redirect()->route('index.index');
     }
 
     public function logout(Request $request)

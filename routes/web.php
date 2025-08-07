@@ -38,5 +38,5 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/dashboard/orders/{id}', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    });
+    })->name('dashboard.index');
 });

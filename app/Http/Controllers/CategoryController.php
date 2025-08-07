@@ -18,7 +18,7 @@ class CategoryController extends Controller
             ->select('category.id', 'category.name', DB::raw('COUNT(book.id) as book_count'))
             ->groupBy('category.id', 'category.name')
             ->paginate(10);
-        return view('admin.category', compact('categories'));
+        return view('admin.category.category', compact('categories'));
     }
 
     /**
@@ -26,8 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $mode = 'add';
-        return view('admin.components.create-or-edit', compact('mode'));
+        return view('admin.category.create');
     }
 
     /**
@@ -56,11 +55,9 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, string $id)
+    public function edit(Category $category)
     {
-        $category = Category::find($id);
-        $mode = 'add';
-        return view('admin.components.create-or-edit', compact('category', 'mode'));
+        return view('admin.category.edit', compact('category'));
     }
 
     /**

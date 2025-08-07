@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    @yield('css')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -26,53 +24,26 @@
                 <li class="nav-item"><a href="#" class="nav-link text-white">Khách hàng</a></li>
             </ul>
         </div>
+
         <!-- Content -->
-        @if (!View::hasSection('no-header'))
-            <div class="container-fluid p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h3>Danh sách
-                        @if (request()->segment(2) == 'book')
-                            Sản phẩm
-                        @elseif (request()->segment(2) == 'category')
-                            Thể loại
-                        @elseif (request()->segment(2) == 'author')
-                            Tác giả
-                        @else
-                            Đơn hàng
-                        @endif
-                    </h3>
-                    @if (request()->segment(2) !== 'orders')
-                        <a href="{{ request()->segment(2) ? route(request()->segment(2) . '.create') : '#' }}"
-                            class="btn btn-primary">
-                            @if (request()->segment(2) == 'book')
-                                Thêm sản phẩm
-                            @elseif (request()->segment(2) == 'category')
-                                Thêm thể loại
-                            @else
-                                Thêm tác giả
-                            @endif
-                        </a>
-                    @endif
-                </div>
-        @endif
-        @if (!View::hasSection('no-content'))
-            <table class="table table-bordered table-hover">
-                <thead class="table-dark">
-                    @yield('table-header')
-                </thead>
-                <tbody>
-                    @yield('table-content')
-                </tbody>
-            </table>
-        @endif
-        @yield('content')
+        <div class="container-fluid p-4">
+            @yield('header') {{-- Tiêu đề và nút thêm --}}
+
+            @yield('table') {{-- Bảng dữ liệu --}}
+
+            @yield('content') {{-- Bất kỳ nội dung tùy chỉnh nào --}}
+        </div>
     </div>
-</body>
-@if (session('success'))
-    <script>
-        alert("{{ session('success') }}");
+
+    @if (session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-@endif
-@yield('js')
+
+</body>
 
 </html>

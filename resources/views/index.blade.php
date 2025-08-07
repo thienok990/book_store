@@ -55,79 +55,8 @@
                         <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#loginModal"><i
                                 class="bi bi-person"></i></button>
                     </div>
-
-                    <!-- Login Modal -->
-                    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Login</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('user.login') }}" method="POST">
-                                        @csrf
-                                        <div class="mb-3">
-                                            <label for="loginEmail" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="loginEmail" name="email"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="loginPassword" class="form-label">Mật khẩu</label>
-                                            <input type="password" class="form-control" id="loginPassword" name="password"
-                                                required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="mb-0">Bạn chưa có tài khoản?
-                                        <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal"
-                                            data-bs-target="#signupModal">Đăng ký</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Signup Modal -->
-                    <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Đăng ký</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('user.store') }}" method="POST">
-                                        @csrf
-                                        <div class="mb-3">
-                                            <label for="signupName" class="form-label">Họ và tên</label>
-                                            <input type="text" class="form-control" id="signupName" name="name"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="signupEmail" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="signupEmail" name="email"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="signupPassword" class="form-label">Mật khẩu</label>
-                                            <input type="password" class="form-control" id="signupPassword"
-                                                name="password" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-success w-100">Đăng ký</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <p class="mb-0">Bạn đã có tài khoản?
-                                        <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal"
-                                            data-bs-target="#loginModal">Đăng nhập</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('components.auth-login-modal')
+                    @include('components.auth-register-modal')
                 @endguest
                 @auth
                     <div class="dropdown">
@@ -140,7 +69,7 @@
                             <li><a class="dropdown-item" href="/cart">Giỏ hàng</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.logout') }}">Đăng xuất</a></li>
                             @if (auth()->user()->isAdmin())
-                                <li><a class="btn dropdown-item" href="{{ route('book.index') }}">Tới trang quản
+                                <li><a class="btn dropdown-item" href="{{ route('dashboard.index') }}">Tới trang quản
                                         trị</a>
                                 </li>
                             @endif
@@ -203,6 +132,15 @@
     @if (session('error'))
         <script>
             alert("{{ session('error') }}");
+        </script>
+    @endif
+    @if (session('login'))
+        <script>
+            const target = document.getElementById("{{ session('login') }}");
+            if (target) {
+                const modal = new bootstrap.Modal(target);
+                modal.show();
+            }
         </script>
     @endif
 </body>

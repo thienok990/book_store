@@ -18,7 +18,7 @@ class AuthorController extends Controller
             ->select('author.id', 'author.name', DB::raw('COUNT(book.id) as book_count'))
             ->groupBy('author.id', 'author.name')
             ->paginate(10);
-        return view('admin.author', compact('authors'));
+        return view('admin.author.author', compact('authors'));
     }
 
     /**
@@ -26,8 +26,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        $mode = 'add';
-        return view('admin.components.create-or-edit', compact('mode'));
+        return view('admin.author.create');
     }
 
     /**
@@ -56,11 +55,9 @@ class AuthorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $author = Author::find($id);
-        $mode = 'edit';
-        return view('admin.components.create-or-edit', compact('author', 'mode'));
+    public function edit(Author $author)
+{
+        return view('admin.author.edit', compact('author'));
     }
 
     /**

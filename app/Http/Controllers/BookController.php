@@ -32,7 +32,7 @@ class BookController extends Controller
             )->paginate(8);
         $categories = Category::all();
         $authors = Author::all();
-        return view('admin.book', compact('books', 'authors', 'categories'));
+        return view('admin.book.book', compact('books', 'authors', 'categories'));
     }
 
     /**
@@ -40,10 +40,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        $mode = 'add';
         $categories = Category::all();
         $authors = Author::all();
-        return view('admin.components.create-or-edit', compact('mode', 'authors', 'categories'));
+        return view('admin.book.create', compact('authors', 'categories'));
     }
 
     /**
@@ -90,13 +89,13 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, string $id)
+    public function edit(Book $book)
     {
-        $book = Book::findOrFail($id);
-        $mode = 'edit';
-        $categories = Category::all();
-        $authors = Author::all();
-        return view('admin.components.create-or-edit', compact('book', 'categories', 'authors', 'mode'));
+        return view('admin.book.edit', [
+            'book' => $book,
+            'authors' => Author::all(),
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
