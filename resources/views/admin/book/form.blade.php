@@ -37,8 +37,9 @@
 
     <div class="col-md-4">
         <label for="price" class="form-label">Giá</label>
-        <input type="number" class="form-control" name="price" id="price" min="1"
-            value="{{ old('price', $book->price ?? '') }}" required>
+        <input type="text" class="form-control" name="price" id="price" min="1"
+            value="{{ old('price', isset($book->price) ? number_format($book->price, 0, ',', '.') : '') }}" required>
+
     </div>
 
     <div class="col-md-4">

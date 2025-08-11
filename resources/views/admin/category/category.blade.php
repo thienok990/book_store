@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-
+@section('title-admin', 'Danh sách Thể loại')
 @section('header')
     @include('admin.components.AddBtn', [
         'title' => 'Danh sách Thể loại',

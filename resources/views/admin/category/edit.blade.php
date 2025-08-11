@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-
+@section('title-admin', 'Sửa Thể loại')
 @section('content')
     <div class="container mt-5">
         <div class="card shadow-sm border-0">

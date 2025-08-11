@@ -1,4 +1,5 @@
 @extends('client.user')
+
 @section(section: 'title', content: 'Thông tin cá nhân')
 @section('content')
     <div class="col-md-9">

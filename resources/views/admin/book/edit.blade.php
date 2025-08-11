@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-
+@section('title-admin', 'Sửa Sản Phẩm')
 @section('content')
     <div class="container mt-5">
         <div class="card shadow-sm border-0">
@@ -35,7 +35,11 @@
         ClassicEditor
             .create(document.querySelector('#editor'))
             .then(editor => {
-                editor.ui.view.editable.element.style.minHeight = '300px';
+                const editableElement = editor.ui.view.editable.element;
+
+                // Gán chiều cao cố định + cuộn dọc
+                editableElement.style.height = '200px'; // Hoặc bao nhiêu px bạn muốn
+                editableElement.style.overflowY = 'auto';
             })
             .catch(console.error);
     </script>

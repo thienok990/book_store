@@ -1,4 +1,7 @@
 @extends('index')
+@section('css')
+    @vite(['resources/css/user.css'])
+@endsection
 @section('body')
     <div class="container-fluid">
         <div class="row">

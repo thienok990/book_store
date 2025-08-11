@@ -50,12 +50,11 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        session(['mode' => 'add']);
         $request->validate([
             'name' => 'required|string',
             'author_id' => 'required|numeric',
             'category_id' => 'required|numeric',
-            'price' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:1',
             'stock' => 'required|integer|min:1',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
@@ -69,12 +68,12 @@ class BookController extends Controller
             'name' => $request->name,
             'author_id' => $request->author_id,
             'category_id' => $request->category_id,
-            'price' => $request->price,
+            'price' => str_replace('.', '',$request->price),
             'stock' => $request->stock,
             'img' => $path,
             'description' => $request->description,
         ]);
-        return redirect()->route('book.index');
+        return redirect()->route('book.index')->with('success', 'Thêm sản phẩm thành công!');
     }
 
     /**
@@ -116,7 +115,7 @@ class BookController extends Controller
         $book->name = $request->name;
         $book->author_id = $request->author_id;
         $book->category_id = $request->category_id;
-        $book->price = $request->price;
+        $book->price = str_replace('.', '',$request->price);
         $book->stock = $request->stock;
         $book->description = $request->description;
         // Nếu có file ảnh mới, lưu ảnh và cập nhật đường dẫn

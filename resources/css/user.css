@@ -1,0 +1,140 @@
+/* Container của form */
+.profile-form {
+    max-width: 600px; /* Không cho form rộng quá */
+    margin: 0 auto; /* Căn giữa */
+    padding: 20px; /* Khoảng cách bên trong vừa phải */
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* Các trường input */
+.profile-form input[type="text"],
+.profile-form input[type="email"],
+.profile-form select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 12px; /* Khoảng cách nhỏ giữa các trường */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Label hoặc tiêu đề nhỏ */
+.profile-form label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Radio button */
+.profile-form .gender-group {
+    margin-bottom: 12px;
+}
+
+/* Button Lưu */
+.profile-form button.save-btn {
+    background-color: #ee4d2d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.profile-form button.save-btn:hover {
+    background-color: #d43d1a;
+}
+/* Group chứa giới tính */
+.gender-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa các radio */
+    margin-bottom: 12px;
+}
+
+/* Group chứa ngày sinh */
+.birthday-group {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các select */
+    margin-bottom: 12px;
+}
+
+.birthday-group select {
+    flex: 1; /* Các select sẽ đều nhau */
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Nếu muốn các radio nút nhỏ gọn hơn */
+.gender-group input[type="radio"] {
+    margin: 0;
+}
+.gender-group label {
+    margin-right: 15px;
+    font-size: 14px;
+}
+.sidebar {
+    background-color: white;
+    height: 80vh;
+    padding: 1rem;
+    border-right: 1px solid #dee2e6;
+}
+.sidebar h5 {
+    margin-top: 1rem;
+}
+.profile-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.form-label {
+    font-weight: 500;
+}
+.product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+.product-title {
+    font-weight: 500;
+}
+.price-original {
+    text-decoration: line-through;
+    color: #999;
+}
+.price-discount {
+    color: #ee4d2d;
+    font-weight: bold;
+}
+.btn-orange {
+    background-color: #ee4d2d;
+    color: white;
+}
+.btn-orange:hover {
+    background-color: #d8431e;
+}
+.order-status {
+    color: #20c997;
+    font-weight: 500;
+}
+.order-item img {
+    width: 80px; /* hoặc 100px tùy theo bố cục mong muốn */
+    height: 100px; /* hoặc auto nếu muốn giữ tỷ lệ */
+    object-fit: cover; /* giúp ảnh không bị méo */
+    border-radius: 4px; /* tùy chọn: bo góc ảnh cho đẹp hơn */
+}
+
+textarea {
+    height: 160px;
+}
+@media (max-width: 576px) {
+    .dropdown-menu {
+        width: 100vw;
+        left: 0 !important;
+        right: 0 !important;
+    }
+}

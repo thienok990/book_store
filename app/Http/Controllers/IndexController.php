@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Cart;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -47,8 +49,10 @@ class IndexController extends Controller
                     ->orWhere('category.name', 'like', '%' . $request->search . '%');
             });
         }
-        $books = $books->paginate(12);
-        return view('client.products', compact('books'));
+        $books = $books->paginate(9);
+        $categories = Category::all();
+        $authors = Author::all();
+        return view('client.products', compact('books', 'categories', 'authors'));
     }
 
     /**
