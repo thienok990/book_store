@@ -7,9 +7,8 @@
 ## 💡 Tính năng
 
 -   Quản lý **sách, tác giả, thể loại** (CRUD đầy đủ)
--   Upload ảnh sản phẩm với **thumbnail**
+-   Upload ảnh sản phẩm
 -   Phân trang Laravel và hiển thị **STT chính xác theo trang**
--   Tìm kiếm, sắp xếp bảng với **DataTables**
 -   Sử dụng **Blade components** để tái sử dụng code (button, modal, table)
 -   Bundle **JS/CSS bằng Vite** để tối ưu hiệu suất
 
@@ -85,7 +84,7 @@ npm run dev
 7. **Chạy server**
 
 ```bash
-php artisan serve
+php artisan serve --host=localhost --port=8000
 ```
 
 -   Truy cập: `http://localhost:8000`
@@ -117,17 +116,32 @@ php artisan serve
 ## 🚀 Demo
 
 -   Chạy local bằng `php artisan serve`
--   Trang admin: quản lý sách, tác giả, thể loại với giao diện đẹp, dễ sử dụng
+-   Trang admin: quản lý sách, tác giả, thể loại với giao diện dễ sử dụng
 
 
-**Dashboard chính**
+**Trang chủ**
+![Dashboard](public/screenshots/index.jpeg)
 
-![Dashboard](public/screenshots/dashboard.jpeg)
+**Danh sách Sản Phẩm**
+![Book List](public/screenshots/products_list.jpeg)
 
-**Danh sách sách**
+**Form thêm Sản Phẩm**
+![Add Book](public/screenshots/form_create_product.jpeg)
 
-![Book List](public/screenshots/Product_List.jpeg)
+**Danh sách Tác Giả**
+![Author List](public/screenshots/author_list.jpeg)
 
-**Form thêm sách**
+**Danh sách Thể loại**
+![Categorylist List](public/screenshots/category_list.jpeg)
 
-![Add Book](public/screenshots/add_book_form.png)
+**Danh Sách Đơn Hàng**
+![Order List](public/screenshots/orders.jpeg)
+
+**Giỏ Hàng**
+![Cart](public/screenshots/cart.jpeg)
+
+**Quản lý Thông Tin Cá Nhân**
+![Cart](public/screenshots/personal_info.jpeg)
+
+**Quản Thông Tin Đơn Hàng**
+![Order Detail](public/screenshots/order_detail.jpeg)
