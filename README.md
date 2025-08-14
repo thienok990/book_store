@@ -1,84 +1,133 @@
-📚 Dự Án Web Bán Sách - Laravel
+# Book Store - Laravel 10
 
-Đây là một ứng dụng web bán sách đơn giản được xây dựng bằng Laravel. Dự án hỗ trợ quản lý sách, tác giả, thể loại và đơn hàng – thích hợp cho mục đích học tập hoặc triển khai nhỏ.
+Ứng dụng **Book Store** được xây dựng bằng **Laravel 10** cho phép quản lý sách, tác giả, thể loại và đơn hàng. Đây là dự án minh họa kỹ năng **CRUD, MVC, Blade components, Eloquent, pagination, DataTables** – phù hợp để học tập hoặc triển khai nhỏ.
 
-🧰 Yêu cầu hệ thống
+---
 
-PHP >= 8.1
+## 💡 Tính năng
 
-Composer
+-   Quản lý **sách, tác giả, thể loại** (CRUD đầy đủ)
+-   Upload ảnh sản phẩm với **thumbnail**
+-   Phân trang Laravel và hiển thị **STT chính xác theo trang**
+-   Tìm kiếm, sắp xếp bảng với **DataTables**
+-   Sử dụng **Blade components** để tái sử dụng code (button, modal, table)
+-   Bundle **JS/CSS bằng Vite** để tối ưu hiệu suất
 
-Laravel >= 10.x
+---
 
-MySQL
+## 🛠️ Yêu cầu hệ thống
 
-Node.js & npm (nếu dùng Laravel Mix hoặc Vite)
+-   PHP >= 8.1
+-   Composer
+-   Node.js >= 18
+-   MySQL / MariaDB
+-   Laravel >= 10.x
 
-🚀 Cài đặt
+---
 
-git clone https://github.com/thienok990/book_store
-cd bookstore-laravel
+## ⚙️ Hướng dẫn cài đặt
+
+1. **Clone repository**
+
+```bash
+git clone https://github.com/thienok990/book_store.git
+cd book_store
+```
+
+2. **Cài đặt dependencies**
+
+```bash
 composer install
-cp .env.example .env
-php artisan key:generate
-
-Chỉnh sửa file .env để kết nối với cơ sở dữ liệu:
-
-DB_DATABASE=your_db_name
-DB_USERNAME=your_db_user
-DB_PASSWORD=your_db_password
-
-Sau đó chạy:
-
-php artisan migrate --seed
 npm install
+```
+
+3. **Copy file cấu hình môi trường**
+
+```bash
+cp .env.example .env
+```
+
+-   Cấu hình database trong `.env`:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=book_store
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+4. **Tạo key ứng dụng**
+
+```bash
+php artisan key:generate
+```
+
+5. **Chạy migration & seed data**
+
+```bash
+php artisan migrate --seed
+```
+
+6. **Build assets bằng Vite**
+
+```bash
+npm run build
+```
+
+-   Hoặc dev mode:
+
+```bash
 npm run dev
+```
+
+7. **Chạy server**
+
+```bash
 php artisan serve
+```
 
-Truy cập: http://localhost:8000
+-   Truy cập: `http://localhost:8000`
 
-🗃 Cấu trúc chức năng
+---
 
-📖 Quản lý sách
+## 📂 Cấu trúc dự án nổi bật
 
-🕓 Quản lý tác giả
+-   `app/Models` – chứa các model như Book, Author, Category
+-   `app/Http/Controllers` – controller xử lý logic
+-   `resources/views/admin` – Blade template quản lý dashboard
+-   `resources/js/app.js` – bundle JS (Bootstrap, jQuery, DataTables)
+-   `resources/css/app.css` – bundle CSS (Bootstrap, DataTables)
+-   `database/seeders` – seed dữ liệu mẫu
 
-🏷 Quản lý thể loại
+---
 
-🛒 Giỏ hàng và đặt hàng
+## 🌟 Kỹ năng áp dụng / Highlight
 
-🔐 Đăng nhập/Đăng ký người dùng
+-   **Laravel MVC & Eloquent ORM**
+-   **Blade components** và reusable views
+-   **CRUD + Validation + File Upload**
+-   **Pagination Laravel + DataTables**
+-   **JS/CSS bundling bằng Vite**
+-   **Responsive design & Bootstrap 5**
 
-🛠 Phân quyền (admin / khách)
+---
 
-🧪 Tài khoản demo (nếu có seed dữ liệu)
+## 🚀 Demo
 
-Email: admin@gmail.com
-Mật khẩu: admin
-
-🗂 File database (tùy chọn)
-
-Nếu bạn không muốn chạy migrate & seed:
-
-mysql -u root -p your_database < database/database.sql
-
-🔑 Hướng dẫn sử dụng ảnh
-
-Sau khi clone repository và cài đặt dự án, hãy thực hiện các bước sau để tạo symlink cho ảnh:
-
-Nếu bạn sử dụng ảnh trong ứng dụng, các ảnh sẽ được lưu trong thư mục storage/app/public và được truy cập qua đường dẫn public/storage. Để đảm bảo ảnh hiển thị đúng sau khi clone repository, bạn cần tạo symlink.
-
-Tạo symlink cho ảnh
-
-php artisan storage:link
+-   Chạy local bằng `php artisan serve`
+-   Trang admin: quản lý sách, tác giả, thể loại với giao diện đẹp, dễ sử dụng
 
 
+**Dashboard chính**
 
-🤝 Góp ý & liên hệ
+![Dashboard](public/screenshots/dashboard.jpeg)
 
-Nếu bạn có đóng góp hoặc ý tưởng, hãy tạo pull request hoặc issue mới.
+**Danh sách sách**
 
-📄 License
+![Book List](public/screenshots/Product_List.jpeg)
 
-This project is open-source and free to use under the MIT license.
+**Form thêm sách**
 
+![Add Book](public/screenshots/add_book_form.png)
