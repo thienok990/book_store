@@ -63,10 +63,9 @@ DB_PASSWORD=
 php artisan key:generate
 ```
 
-5. **Chạy migration & seed data**
+5. **Import dữ liệu từ file SQL**
 
 ```bash
-Import dữ liệu từ file SQL
 
 Thay vì chạy migration và seed, bạn import trực tiếp file SQL:
 
@@ -86,7 +85,7 @@ Laravel cần symbolic link để truy cập các file upload:
 
 ```bash
 php artisan storage:link
-
+```
 7. **Build assets bằng Vite**
 
 ```bash
