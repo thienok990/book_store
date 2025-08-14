@@ -66,7 +66,12 @@ php artisan key:generate
 5. **Chạy migration & seed data**
 
 ```bash
-php artisan migrate --seed
+Import dữ liệu từ file SQL
+Thay vì chạy migration và seed, bạn import trực tiếp file SQL:
+Mở công cụ quản lý MySQL bạn đang dùng (PHPMyAdmin, HeidiSQL, DBeaver…).
+Tạo một database mới, ví dụ book_store.
+Chọn database vừa tạo → Import → chọn file book_store.sql trong thư mục database.
+Nhấn “Go” hoặc “Start” để import toàn bộ dữ liệu.
 ```
 
 6. **Build assets bằng Vite**
