@@ -35,7 +35,7 @@
                     @foreach ($details as $detail)
                         <!-- Sản phẩm 1 -->
                         <div class="d-flex mb-3 order-item">
-                            <img src="{{ asset('storage/' . $detail->img) }}" alt="sp1" class="product-img me-3">
+                            <img src="{{ asset('storage/' . $detail->img) }}" alt="sp1" class="product-img me-3" loading="lazy">
                             <div class="flex-grow-1">
                                 <div class="product-title">{{ $detail->name }}
                                 </div>

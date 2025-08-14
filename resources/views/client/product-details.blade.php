@@ -7,7 +7,7 @@
                 <div class="row g-4 shadow-sm p-4 rounded bg-white">
                     <!-- Cột hình ảnh -->
                     <div class="col-md-5 text-center">
-                        <img src="{{ asset('storage/' . $book->img) }}" alt="Bìa sách"
+                        <img src="{{ asset('storage/' . $book->img) }}" alt="Bìa sách" loading="lazy"
                             class="img-fluid rounded shadow-sm mb-3">
                         <div class="text-danger fw-bold fs-4">
                             {{ number_format($book->price, 0, ',', '.') }} đ

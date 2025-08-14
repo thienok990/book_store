@@ -8,7 +8,7 @@
             <!-- Sidebar -->
             <div class="col-md-3 sidebar">
                 <div class="d-flex align-items-center mb-3">
-                    <img src="{{asset('storage/images/avt.jpg')}}" class="rounded-circle me-2" style="width:30px;height:30px">
+                    <img src="{{asset('storage/images/avt.jpg')}}" class="rounded-circle me-2" style="width:30px;height:30px" loading="lazy">
                     <div>
                         <strong>{{ Auth::user()->name }}</strong><br>
                         <a href="{{ route('user.show') }}">✎ Sửa Hồ Sơ</a>

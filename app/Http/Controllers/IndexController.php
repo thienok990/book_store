@@ -21,7 +21,6 @@ class IndexController extends Controller
             ->filterPrice($request->min_price, $request->max_price)
             ->filterAuthor($request->author_id)
             ->filterCategory($request->category_id)
-            // ->groupBy('book.id')
             ->paginate(12)
             ->appends([
                 'min_price' => $request->min_price ?? '',
@@ -58,7 +57,7 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id, $slug)
     {
         $book = DB::table('book')
             ->join('author', 'book.author_id', '=', 'author.id')

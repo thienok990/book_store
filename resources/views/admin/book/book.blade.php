@@ -30,7 +30,7 @@
                     <td>{{ $book->author_name }}</td>
                     <td>{{ number_format($book->price, 0, ',', '.') }} đ</td>
                     <td>{{ $book->stock }}</td>
-                    <td><img src="{{ asset('storage/' . $book->img) }}" alt="Hình ảnh" style="height:50px;width:50px;"></td>
+                    <td><img src="{{ asset('storage/' . $book->img) }}" alt="Hình ảnh" style="height:50px;width:50px;" loading="lazy"></td>
                     <td>
 
                         @include('admin.components.EditDeleteBtn', ['item' => $book, 'resource' => 'book'])

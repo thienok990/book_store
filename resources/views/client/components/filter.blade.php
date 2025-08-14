@@ -1,5 +1,5 @@
-<div class="">
-    <div class="card p-3">
+<div class="filter" style="position: sticky;">
+    <div class="card p-3" >
         <h5 class="mb-3">Bộ lọc</h5>
         <form action="{{ route('index.index') }}" method="get" id="filterForm">
             <select class="form-select mb-3 optionSelect" name="filter">

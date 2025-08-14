@@ -23,6 +23,7 @@ class Book extends Model
             ->select(
                 'book.id as book_id',
                 'book.name',
+                'book.slug',
                 'book.price',
                 'book.stock',
                 'book.img',

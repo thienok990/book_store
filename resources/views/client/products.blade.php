@@ -22,9 +22,9 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product-card h-100 p-2">
                                 <div class="position-relative">
-                                    <img src="{{ asset('storage/' . $book->img) }}" alt="{{ $book->name }}" />
+                                    <img src="{{ asset('storage/' . $book->img) }}" alt="{{ $book->name }}" loading="lazy"/>
                                     <div class="product-overlay">
-                                        <a href="{{ route('index.show', $book->book_id) }}"
+                                        <a href="{{ route('index.show', parameters: ['id' => $book->book_id, 'slug' => $book->slug]) }}"
                                             style="text-decoration: none">👁️</a>
                                         <button type="submit" class="btnAdd" data-id="{{ $book->book_id }}">🛒</button>
                                     </div>

@@ -3,21 +3,15 @@ import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
     server: {
-        host: "localhost",
-        port: 5173,
-        origin: "http://localhost:5173",
-        cors: {
-            origin: ["http://localhost:8000"],
-            methods: ["GET", "POST"],
-            allowedHeaders: ["Content-Type", "Authorization"],
-        },
+        host: "localhost", // bắt Vite server trên localhost
+        port: 5173, // port dev Vite
         hmr: {
-            host: "localhost",
+            host: "localhost", // đồng bộ HMR với Laravel
         },
     },
     plugins: [
         laravel({
-            input: ["resources/sass/app.scss", "resources/js/app.js"],
+            input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
         }),
     ],

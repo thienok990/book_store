@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-2">
         <div class="container-fluid">
             <div class="col-3 ">
-                <img src="{{ asset('storage/images/thiet-ke-logo-nha-sach-book-pink.png') }}" alt="logo"
+                <img src="{{ asset('storage/images/thiet-ke-logo-nha-sach-book-pink.png') }}" alt="logo" loading="lazy"
                     style=" height: 75px;
     width: auto;
     object-fit: contain;">
