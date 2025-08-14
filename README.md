@@ -116,6 +116,7 @@ php artisan serve --host=localhost --port=8000
 ## 🚀 Demo
 
 -   Chạy local bằng `php artisan serve`
+-   Tài khoản admin: `thiencao.work@gmail.com`, mật khẩu: `Thienok990`
 -   Trang admin: quản lý sách, tác giả, thể loại với giao diện dễ sử dụng
 
 
