@@ -140,8 +140,8 @@ php artisan serve --host=localhost --port=8000
 **Giỏ Hàng**
 ![Cart](public/screenshots/cart.jpeg)
 
-**Quản lý Thông Tin Cá Nhân**
+**Thông Tin Cá Nhân**
 ![Cart](public/screenshots/personal_info.jpeg)
 
-**Quản Thông Tin Đơn Hàng**
+**Thông Tin Đơn Hàng**
 ![Order Detail](public/screenshots/order_detail.jpeg)
