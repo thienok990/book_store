@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AuthorController extends Controller
 {
@@ -39,6 +40,7 @@ class AuthorController extends Controller
         ]);
         Author::create([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
         ]);
         return redirect()->route('author.index')->with(['message' => 'Tác giả thêm thành công']);
     }
@@ -56,7 +58,7 @@ class AuthorController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Author $author)
-{
+    {
         return view('admin.author.edit', compact('author'));
     }
 
@@ -69,7 +71,8 @@ class AuthorController extends Controller
         $request->validate([
             'name' => 'required|string',
         ]);
-        $author->name = $request->input('name');
+        $author->name = $request->name;
+        $author->slug = Str::slug($request->name);
         $author->save();
         return redirect()->route('author.index');
     }

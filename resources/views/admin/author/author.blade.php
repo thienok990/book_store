@@ -20,7 +20,7 @@
         <tbody>
             @foreach ($authors as $author)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $authors->firstItem() + $loop->index }}</td>
                     <td>{{ $author->name }}</td>
                     <td>{{ $author->book_count }}</td>
                     <td>

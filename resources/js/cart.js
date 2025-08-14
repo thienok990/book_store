@@ -17,10 +17,12 @@ $(document).ready(function () {
         $.ajax({
             url: "http://localhost:8000/cart/" + id,
             method: "PUT",
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content"),
+            },
             data: {
                 quantity: val,
                 id: id,
-                _token: $("meta[name='csrf-token']").attr("content"),
             },
             success: function (response) {
                 console.log("Cập nhật thành công:", response);
@@ -66,18 +68,43 @@ $(document).ready(function () {
         $("#cart-total").text(totalPrice.toLocaleString("vi-VN") + "đ");
     }
     $(".btnDelete").on("click", function () {
-        const id = $(this).data("id"); // Lấy ID từ nút delete
-        console.log(id); // Kiểm tra ID
-
+        const id = $(this).data("id");
+        const $row = $(this).closest(".cart-item"); // Lấy dòng sản phẩm
+        let totalQuantity = parseInt($(".total-quantity").text(), 10);
         $.ajax({
-            url: "http://localhost:8000/cart/" + id, // Địa chỉ URL xóa
-            method: "DELETE", // Phương thức DELETE
+            url: "/cart/" + id,
+            method: "DELETE",
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content"),
+            },
+            success: function (response) {
+                $row.remove(); // Xóa khỏi DOM
+                totalQuantity -= 1; // Giảm số lượng giỏ hàng
+                $(".total-quantity").text(totalQuantity); // Cập nhật số lượng giỏ hàng
+            },
+            error: function (xhr) {
+                console.log("Error:", xhr.responseText);
+            },
+        });
+    });
+    $(".btnAdd").on("click", function () {
+        const id = $(this).data("id"); // Lấy ID từ nút Add
+        let totalQuantity = parseInt($(".total-quantity").text(), 10);
+        let quantity = $("input[name='quantity']").val();
+        if (!quantity || isNaN(quantity) || quantity <= 0) {
+            quantity = 1;
+        }
+        $.ajax({
+            url: "http://localhost:8000/cart/add/" + id, // Địa chỉ URL add
+            method: "POST", // Phương thức Add
+            data: { quantity: quantity },
             headers: {
                 "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content"), // Gửi CSRF token
             },
             success: function (response) {
-                console.log("Deleted successfully:", response); // Thành công
-                location.reload(); // Reload lại trang
+                $(".total-quantity").text(totalQuantity + 1); // Cập nhật số lượng giỏ hàng
+                alert("Thêm vào giỏ hàng thành công!"); // Thông báo thành công
+                $("input[name='quantity']").val(1); // Đặt lại số lượng về 1
             },
             error: function (xhr) {
                 console.log("Error:", xhr.responseText); // Lỗi

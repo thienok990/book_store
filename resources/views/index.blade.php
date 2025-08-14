@@ -43,7 +43,7 @@
             <div class="d-flex align-items-center gap-3 col-3 justify-content-end">
                 <a href="{{ route('cart.show') }}" class="position-relative text-decoration-none text-dark">
                     <i class="bi bi-cart" style="font-size: 1.4rem;"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success total-quantity">
                         {{ $totalQuantity }}
                     </span>
                 </a>
@@ -128,8 +128,8 @@
         </div>
     </div>
     <!-- Bootstrap Bundle 5.3.3 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
 
     <!-- Hiển thị thông báo -->
     @if (session('success'))

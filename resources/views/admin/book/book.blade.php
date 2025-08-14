@@ -24,7 +24,7 @@
         <tbody>
             @foreach ($books as $book)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $books->firstItem() + $loop->index }}</td>
                     <td>{{ $book->name }}</td>
                     <td>{{ $book->category_name }}</td>
                     <td>{{ $book->author_name }}</td>

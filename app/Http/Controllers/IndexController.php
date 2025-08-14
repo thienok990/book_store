@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
-use App\Models\Cart;
+use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,45 +15,29 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        $books = DB::table('book')
-            ->join('author', 'book.author_id', '=', 'author.id')
-            ->join('category', 'book.category_id', '=', 'category.id')
-            ->select(
-                'book.id as book_id',
-                'book.name',
-                'book.price',
-                'book.stock',
-                'book.img',
-                'book.description',
-                'author.name as author_name',
-                'category.name as category_name'
-            );
-        $books->when($request->filter, function ($query, $filter) {
-            switch ($filter) {
-                case 'price_asc':
-                    return $query->orderBy('book.price', 'asc');
-                case 'price_desc':
-                    return $query->orderBy('book.price', 'desc');
-                case 'name_asc':
-                    return $query->orderBy('book.name', 'asc');
-                case 'name_desc':
-                    return $query->orderBy('book.name', 'desc');
-                default:
-                    return $query;
-            }
-        });
-        if (!empty($request->search)) {
-            $books->where(function ($query) use ($request) {
-                $query->where('book.name', 'like', '%' . $request->search . '%')
-                    ->orWhere('author.name', 'like', '%' . $request->search . '%')
-                    ->orWhere('category.name', 'like', '%' . $request->search . '%');
-            });
-        }
-        $books = $books->paginate(9);
+        $books = Book::index() // gọi scopeIndex
+            ->filterSort($request->filter)
+            ->filterSearch($request->search)
+            ->filterPrice($request->min_price, $request->max_price)
+            ->filterAuthor($request->author_id)
+            ->filterCategory($request->category_id)
+            // ->groupBy('book.id')
+            ->paginate(12)
+            ->appends([
+                'min_price' => $request->min_price ?? '',
+                'max_price' => $request->max_price ?? '',
+                'filter' => $request->filter ?? '',
+                'search' => $request->search ?? '',
+                'author_id' => $request->author_id ?? '',
+                'category_id' => $request->category_id ?? ''
+            ]);
+
         $categories = Category::all();
         $authors = Author::all();
+
         return view('client.products', compact('books', 'categories', 'authors'));
     }
+
 
     /**
      * Show the form for creating a new resource.

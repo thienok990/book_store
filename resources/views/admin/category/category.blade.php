@@ -20,7 +20,7 @@
         <tbody>
              @foreach ($categories as $category)
         <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td>{{ $categories->firstItem() + $loop->index }}</td>
             <td>{{ $category->name }}</td>
             <td>{{ $category->book_count }}</td>
             <td>

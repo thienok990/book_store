@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BookController extends Controller
 {
@@ -22,17 +23,14 @@ class BookController extends Controller
             ->select(
                 'book.id as book_id',
                 'book.name',
-                'book.category_id',
-                'book.author_id',
                 'book.price',
                 'book.stock',
                 'book.img',
+                'book.description',
                 'author.name as author_name',
                 'category.name as category_name'
-            )->paginate(8);
-        $categories = Category::all();
-        $authors = Author::all();
-        return view('admin.book.book', compact('books', 'authors', 'categories'));
+            )->paginate(10);
+        return view('admin.book.book', compact('books'));
     }
 
     /**
@@ -54,11 +52,10 @@ class BookController extends Controller
             'name' => 'required|string',
             'author_id' => 'required|numeric',
             'category_id' => 'required|numeric',
-            'price' => 'required|numeric|min:1',
+            'price' => 'required|min:1',
             'stock' => 'required|integer|min:1',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
-
         if ($request->hasFile('img')) {
             $file = $request->file('img');
             $fileName = time() . "_" . $file->getClientOriginalName();
@@ -68,10 +65,11 @@ class BookController extends Controller
             'name' => $request->name,
             'author_id' => $request->author_id,
             'category_id' => $request->category_id,
-            'price' => str_replace('.', '',$request->price),
+            'price' => str_replace('.', '', $request->price),
             'stock' => $request->stock,
             'img' => $path,
             'description' => $request->description,
+            'slug' => Str::slug($request->name)
         ]);
         return redirect()->route('book.index')->with('success', 'Thêm sản phẩm thành công!');
     }
@@ -115,9 +113,10 @@ class BookController extends Controller
         $book->name = $request->name;
         $book->author_id = $request->author_id;
         $book->category_id = $request->category_id;
-        $book->price = str_replace('.', '',$request->price);
+        $book->price = str_replace('.', '', $request->price);
         $book->stock = $request->stock;
         $book->description = $request->description;
+        $book->slug = Str::slug($request->name);
         // Nếu có file ảnh mới, lưu ảnh và cập nhật đường dẫn
         if ($request->hasFile('img')) {
             Storage::disk('public')->delete($book->img);

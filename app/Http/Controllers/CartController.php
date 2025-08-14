@@ -38,24 +38,24 @@ class CartController extends Controller
         $request->validate([
             'quantity' => 'integer|min:1',
         ]);
+        if (request()->segment(1) == "cart") {
+            $quantity = $request->quantity;
+        }
         $item = Cart::where('user_id', Auth::id())
             ->where('book_id', $id)
             ->first();
-
         if ($item) {
-            if (request()->segment(1) == "book") {
-                $item->increment('quantity',  $request->quantity);
-            }
-            $item->increment('quantity', 1);
+            $item->increment('quantity', $quantity);
         } else {
             Cart::create([
                 'user_id' => Auth::id(),
                 'book_id' => $id,
-                'quantity' => 1,
+                'quantity' => $quantity,
             ]);
         }
-
-        return redirect()->back();
+        return response()->json([
+            'message' => 'Item Added successfully'
+        ]);
     }
 
     /**
@@ -75,7 +75,7 @@ class CartController extends Controller
                 'book.img',
             )
             ->where('user_id', Auth::id())
-            ->get();
+             ->get() ?? collect();
         $total_price = 0;
         foreach ($cart_items as $item) {
             $total_price += (float)$item->quantity * $item->price;
@@ -115,7 +115,17 @@ class CartController extends Controller
         $item = Cart::where('book_id', $id)
             ->where('user_id', Auth::id())
             ->first();
+
+        if (!$item) {
+            return response()->json([
+                'message' => 'Item not found'
+            ], 404);
+        }
+
         $item->delete();
-        return response()->json(['message' => 'Item deleted successfully']);
+
+        return response()->json([
+            'message' => 'Item deleted successfully'
+        ]);
     }
 }
