@@ -65,18 +65,15 @@ php artisan key:generate
 
 5. **Import dữ liệu từ file SQL**
 
-```bash
-
 Thay vì chạy migration và seed, bạn import trực tiếp file SQL:
+```bash
+-   Mở công cụ quản lý MySQL bạn đang dùng (PHPMyAdmin, HeidiSQL, DBeaver…).
 
-Mở công cụ quản lý MySQL bạn đang dùng (PHPMyAdmin, HeidiSQL, DBeaver…).
+-   Tạo một database mới, ví dụ book_store.
 
-Tạo một database mới, ví dụ book_store.
+-   Chọn database vừa tạo → Import → chọn file book_store.sql trong thư mục database.
 
-Chọn database vừa tạo → Import → chọn file book_store.sql trong thư mục database.
-
-Nhấn “Go” hoặc “Start” để import toàn bộ dữ liệu.
-
+-   Nhấn “Go” hoặc “Start” để import toàn bộ dữ liệu.
 ```
 
 6. **Tạo symbolic link cho storage**
