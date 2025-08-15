@@ -63,13 +63,27 @@ DB_PASSWORD=
 php artisan key:generate
 ```
 
-5. **Chạy migration & seed data**
+5. **Import dữ liệu từ file SQL**
 
+Thay vì chạy migration và seed, bạn import trực tiếp file SQL:
 ```bash
-php artisan migrate --seed
+-   Mở công cụ quản lý MySQL bạn đang dùng (PHPMyAdmin, HeidiSQL, DBeaver…).
+
+-   Tạo một database mới, ví dụ book_store.
+
+-   Chọn database vừa tạo → Import → chọn file book_store.sql trong thư mục database.
+
+-   Nhấn “Go” hoặc “Start” để import toàn bộ dữ liệu.
 ```
 
-6. **Build assets bằng Vite**
+6. **Tạo symbolic link cho storage**
+
+Laravel cần symbolic link để truy cập các file upload:
+
+```bash
+php artisan storage:link
+```
+7. **Build assets bằng Vite**
 
 ```bash
 npm run build
@@ -81,7 +95,7 @@ npm run build
 npm run dev
 ```
 
-7. **Chạy server**
+8. **Chạy server**
 
 ```bash
 php artisan serve --host=localhost --port=8000
@@ -115,7 +129,7 @@ php artisan serve --host=localhost --port=8000
 
 ## 🚀 Demo
 
--   Chạy local bằng `php artisan serve`
+-   Chạy local bằng `php artisan serve --host=localhost --port=8000`
 -   Tài khoản admin: `thiencao.work@gmail.com`, mật khẩu: `Thienok990`
 -   Trang admin: quản lý sách, tác giả, thể loại với giao diện dễ sử dụng
 
