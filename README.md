@@ -121,7 +121,10 @@ php artisan serve --host=localhost --port=8000
 
 
 **Trang chủ**
-![Dashboard](public/screenshots/index.jpeg)
+![Home](public/screenshots/index.jpeg)
+
+**Trang Dashboard**
+![Dashboard](public/screenshots/dashboard.jpeg)
 
 **Danh sách Sản Phẩm**
 ![Book List](public/screenshots/products_list.jpeg)

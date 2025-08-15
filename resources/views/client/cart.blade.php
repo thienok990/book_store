@@ -5,7 +5,7 @@
 @endsection
 @section('body')
     <div class="container py-5">
-        <form action="{{ route('checkout.index') }}" method="get">
+        <form action="{{ route('checkout.index') }}" method="GET">
             <div class="row">
                 <!-- Cart Items -->
                 <div class="col-lg-8 mb-4">

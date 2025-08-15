@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\OrdersController;
@@ -36,7 +37,5 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/dashboard/book', BookController::class);
     Route::get('/dashboard/orders', [OrdersController::class, 'indexAdmin'])->name('orders.indexAdmin');
     Route::put('/dashboard/orders/{id}', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard.index');
+    Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard.index');
 });

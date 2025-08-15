@@ -9,7 +9,6 @@ class Orders extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderFactory> */
     use HasFactory;
-    protected $fillable = ['user_id', 'total_price', 'status', 'phone', 'name', 'email', 'session_id', 'status', 'address'];
+    protected $fillable = ['user_id', 'total_price', 'status', 'phone', 'name', 'email', 'session_id', 'status', 'address', 'total'];
     public $table = "orders";
-    public $timestamps = false;
 }

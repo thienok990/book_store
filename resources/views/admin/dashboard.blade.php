@@ -12,7 +12,7 @@
     <div class="d-flex">
         <!-- Sidebar -->
         <div class="bg-dark text-white p-3 vh-100" style="width: 250px;">
-            <h4>Dashboard</h4>
+            <h4><a href="{{ route('dashboard.index') }}" class="nav-link text-white">Dashboard</a></h4>
             <ul class="nav flex-column">
                 <li class="nav-item"><a href="{{ route('index.index') }}" class="nav-link text-white">Trang chủ</a></li>
                 <li class="nav-item"><a href="{{ route('book.index') }}" class="nav-link text-white">Sản phẩm</a></li>

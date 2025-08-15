@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `author` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table book_store.author: ~29 rows (approximately)
+-- Dumping data for table book_store.author: ~28 rows (approximately)
 INSERT INTO `author` (`id`, `name`, `slug`) VALUES
 	(14, 'Conan Doyle', 'conan-doyle'),
 	(15, 'Nguyễn Du', 'nguyen-du'),
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `book` (
   CONSTRAINT `book_cagetory_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table book_store.book: ~21 rows (approximately)
+-- Dumping data for table book_store.book: ~22 rows (approximately)
 INSERT INTO `book` (`id`, `name`, `slug`, `category_id`, `author_id`, `price`, `stock`, `description`, `img`) VALUES
 	(21, 'Truyện Kiều', 'truyen-kieu', 20, 15, 52000.00, 400, 'Truyện Kiều\r\n\r\nNguyễn Du (tên tự là Tố Như, hiệu là Thanh Hiên), là "Đại thi hào dân tộc" và là một danh nhân văn hóa thế giới. Tên tuổi của ông gắn liền với kiệt tác mang tên "Truyện Kiều".\r\n\r\n"Truyện Kiều từng là một niềm say mê lớn trong hàng trăm năm, đối với hàng triệu người, Truyện Kiều cũng sẽ mãi mãi là một niềm say mê lớn." - Hoài Thanh\r\n\r\nTruyện Kiều đã từng được coi là sách gối đầu giường của biết bao thế hệ. Người ta vịnh Kiều, bói Kiều, đưa Kiều từ văn học vào đời sống. Người ta tán thưởng Truyện Kiều, học tập văn chương của Truyện Kiều. Người ta cảm thông, xót thương cho những số phận hồng nhan nơi Truyện Kiều,... Chính những giá trị đó đã làm Truyện Kiều sống mãi trong văn học và đời sống của nhân dân Việt Nam. Nguyễn Du đã để lại cho hậu thế một "kho báu" mà tin chắc rằng xưa nay hiếm có nhà văn, nhà thơ nào có thể vượt qua được.', 'images/1754576513_NXBTreStoryFull_03462015_104616.jpg'),
 	(22, 'Đắc Nhân Tâm', 'dac-nhan-tam', 21, 16, 64000.00, 200, '<p><strong>Đắc Nhân Tâm</strong></p><p>Một trong những cuốn sách thay đổi cuộc đời hàng triệu người trên thế giới</p><p>“Đắc nhân tâm”, một trong những cuốn sách bán chạy nhất mọi thời đại, do Dale Carnegie viết được xuất bản lần đầu vào năm 1936, trở thành cuốn sách đầu tiên và hay nhất thuộc thể loại sách phát triển bản thân. Tác phẩm được chuyển ngữ sang nhiều thứ tiếng với 15 triệu bản sách đã được bán ra trên khắp thế giới, đồng thời cũng là cuốn sách đứng đầu danh mục Sách bán chạy nhất của New York Times trong nhiều năm liền. Riêng ở Hoa Kỳ, cuốn sách đã được tái bản tới lần thứ 90.</p><p>Bìa của cuốn sách được thiết kế với phong cách tối giản, áp dụng những tông màu tương phản thu hút ánh nhìn và làm nổi bật thông tin quan trọng về cuốn sách. Thiết kế này được tinh chỉnh sao cho phù hợp và đồng nhất với các sản phẩm khác trên thị trường, giúp độc giả nhận biết và dễ dàng tiếp cận. Font chữ và bố cục trên bìa cũng được sắp xếp sao rõ ràng, tạo điều kiện thuận lợi cho việc đọc và tiếp nhận nội dung của sách.</p><p>Cuốn sách "Đắc nhân tâm" của Dale Carnegie không chỉ là một tài liệu về ứng xử - giao tiếp, mà nó còn là một hành trình tri thức và trải nghiệm sâu sắc cho mọi đối tượng độc giả, không phân biệt độ tuổi, chỉ cần có sự quan tâm và khao khát phát triển bản thân. Với sức ảnh hưởng lớn, cuốn sách này không chỉ là nguồn cảm hứng mà còn là hướng dẫn chi tiết giúp mỗi người tự khám phá và phát triển tiềm năng của bản thân mình.</p>', 'images/1754577764_Đắc Nhân Tâm.jpg'),
@@ -113,11 +113,9 @@ CREATE TABLE IF NOT EXISTS `cart` (
   KEY `cart_book_id_foreign` (`book_id`),
   CONSTRAINT `cart_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE,
   CONSTRAINT `cart_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table book_store.cart: ~2 rows (approximately)
-INSERT INTO `cart` (`id`, `session_id`, `user_id`, `book_id`, `quantity`) VALUES
-	(198, NULL, 6, 26, 1);
+-- Dumping data for table book_store.cart: ~0 rows (approximately)
 
 -- Dumping structure for table book_store.category
 CREATE TABLE IF NOT EXISTS `category` (
@@ -128,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   UNIQUE KEY `cagetory_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table book_store.category: ~35 rows (approximately)
+-- Dumping data for table book_store.category: ~38 rows (approximately)
 INSERT INTO `category` (`id`, `name`, `slug`) VALUES
 	(19, 'Tiểu Thuyết', 'tieu-thuyet'),
 	(20, 'Truyện Ngắn', 'truyen-ngan'),
@@ -175,9 +173,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table book_store.migrations: ~13 rows (approximately)
+-- Dumping data for table book_store.migrations: ~16 rows (approximately)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2025_03_24_143638_create_cagetory_table', 1),
 	(2, '2025_03_24_143651_create_author_table', 1),
@@ -193,7 +191,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(16, '2025_08_02_034456_create_sessions_table', 4),
 	(24, '2025_08_13_105714_add_slug_to_book_table', 5),
 	(25, '2025_08_13_105730_add_slug_to_category_table', 6),
-	(26, '2025_08_13_110030_add_slug_to_author_table', 7);
+	(26, '2025_08_13_110030_add_slug_to_author_table', 7),
+	(27, '2025_08_15_070338_add_timestamp_to_orders_table', 8);
 
 -- Dumping structure for table book_store.orders
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -207,14 +206,17 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `session_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `total_price` decimal(10,2) NOT NULL,
   `status` enum('pending','completed','canceled','shipping') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `orders_user_id_foreign` (`user_id`),
   CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table book_store.orders: ~2 rows (approximately)
-INSERT INTO `orders` (`id`, `user_id`, `address`, `phone`, `name`, `email`, `note`, `session_id`, `total_price`, `status`) VALUES
-	(25, 6, 'Khu Phố Khoan Hậu, Phường Xuân Đài, Thị xã Sông Cầu, Tỉnh Phú Yên', '0388145796', 'Cao Lương Thiện', 'thiencao.work@gmail.com', NULL, NULL, 272000.00, 'pending');
+INSERT INTO `orders` (`id`, `user_id`, `address`, `phone`, `name`, `email`, `note`, `session_id`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
+	(25, 6, 'Khu Phố Khoan Hậu, Phường Xuân Đài, Thị xã Sông Cầu, Tỉnh Phú Yên', '0388145796', 'Cao Lương Thiện', 'thiencao.work@gmail.com', NULL, NULL, 272000.00, 'pending', NULL, NULL),
+	(26, 6, 'Khu Phố Khoan Hậu, Phường Xuân Đài, Thị xã Sông Cầu, Tỉnh Phú Yên', '0388145796', 'Cao Lương Thiện', 'thiencao.work@gmail.com', NULL, NULL, 194000.00, 'pending', '2025-08-15 00:16:08', '2025-08-15 00:16:08');
 
 -- Dumping structure for table book_store.order_details
 CREATE TABLE IF NOT EXISTS `order_details` (
@@ -229,11 +231,13 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   KEY `order_details_ibfk_1` (`order_id`),
   CONSTRAINT `order_details_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE,
   CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table book_store.order_details: ~5 rows (approximately)
+-- Dumping data for table book_store.order_details: ~3 rows (approximately)
 INSERT INTO `order_details` (`id`, `order_id`, `book_id`, `quantity`, `price`, `total`) VALUES
-	(18, 25, 27, 2, 136000.00, 272000.00);
+	(18, 25, 27, 2, 136000.00, 272000.00),
+	(19, 26, 26, 1, 115000.00, 115000.00),
+	(20, 26, 23, 1, 79000.00, 79000.00);
 
 -- Dumping structure for table book_store.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
@@ -274,19 +278,10 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table book_store.sessions: ~11 rows (approximately)
+-- Dumping data for table book_store.sessions: ~2 rows (approximately)
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-	('dclFprqF4BCiPfKagp0RVX0axWJPsRnsoukXbAVx', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiY1hYSDZFNlFpNHlKMFhHZEoxQWJianlnYjJWVXFYUTlYMDFrVEprVSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1755170580),
-	('Ehm71KJ9BdzpodFtVdZUP6Bvy9P4FlhHjAJeunfl', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMXM5Wk1CODRBdVJxZ2dwTThXczAzZndmQXZoTFZTdmphN2prSjdRdyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1755170491),
-	('ezhN43uf6VsA8rADvsYZB3mgnegacgXTcHCWsDhT', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSERpVzNBRjVaS3VBOXNBOHBLWTNzOUg3WE56RVlseDljRTFRN0g2eSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1755170349),
-	('fYT97rCmfRyWbHQDbT41SSMUi5XtBlL1GKA0DHKI', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiR0llbWwxUXhyZ21odEtYSlc3a2ZmREtqc0U2VHRTTDRURE4wclR4bCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1755170352),
-	('HhJtPqSeKy2p5DcPC7u8HudlwNycVrod3noi9WcH', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSzdvcFNCUU5sMUJqbzl3SVNTZ1MxUTYybnRBUlViN1FCcWhuMmNxbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1755170483),
-	('IoZfkQ8jVYcxzvGVhck6hv4je81ebMljQb1iQO0O', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidkd2TXB2MU1pYjNlWGFucUhUNk1xN1FYS3RCbWd2NlBCQmVVOGFwUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1755170488),
-	('jdunM7nnYNUh6SdljR3LErSDghxKE7OfyFKwKC9c', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib3ZVcW9nTmNPajRnMlhsZXBpcjhhRVB3T2Z3UG1lV0pjcldoYktNMyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1755170575),
-	('wd7C99ojTFVLZxfLCGIJerXOanl7FXkqmqXO565e', 6, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWU1FZnFncHIwWHJwN1R4dGpiUjd0RmdqcmFpNlJZOEhERlV6MjIybyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9kYXNoYm9hcmQvb3JkZXJzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Njt9', 1755178222),
-	('YNxgoMupTdwk4pvyPJBAZwPKvWr2CEy0hKRlCQyr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV1NHZGtMcG1jdWtlVmpMcU83WWJUek1vZ1lNNW5sbDFGd1VUdWt3aSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1755170477),
-	('ZKxmqMqC7LSXG72MWZPgUycQbKpsUvSCoK3hjmOc', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNTk1cTdEN3RuNnIzV2FkMmd2amtVTzFCN0MwUUtZaTQ3N2FiNlphYiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1755170968),
-	('zZwZ6YimLBXEYnnnUxxqIOURiS86IewvtajsNpp6', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQWhUZzQxWnI4RVhiajkzdWQyU1dHcGxPb2NYdlMzbENpOGVRUmJZdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ib29rLzIzLW5oYS1naWEta2ltIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1755170487);
+	('s5MsFGdS4WyMnkUtnq2y1D3yeugP6xohFfiKm6Hn', 6, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWjU5OTdhenB4VHNuVHpReXB0U0xvRnZtY1lNYTBScFc0ckFlYjkwZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjY7fQ==', 1755243170),
+	('wDfavgP8kS6UZUEhbC98kytdqQBbRP4AZWBgPTuZ', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaDVHU3BsWkdsRW16dzhqVVl3Y2FuU2J2VnZXbFBtaTQwazRoNWRJbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1755240274);
 
 -- Dumping structure for table book_store.user
 CREATE TABLE IF NOT EXISTS `user` (
