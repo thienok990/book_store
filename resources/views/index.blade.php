@@ -88,7 +88,7 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{{ route('user.show') }}">Thông tin cá nhân</a></li>
-                                <li><a class="dropdown-item" href="/cart">Giỏ hàng</a></li>
+                                <li><a class="dropdown-item" href="{{route('cart.show')}}">Giỏ hàng</a></li>
                                 <li><a class="dropdown-item" href="{{ route('user.logout') }}">Đăng xuất</a></li>
                                 @if (auth()->user()->isAdmin())
                                     <li><a class="dropdown-item" href="{{ route('dashboard.index') }}">Tới trang quản

@@ -141,7 +141,7 @@ class OrdersController extends Controller
         foreach ($oders as $order) {
             $order_details[$order->order_id][] = $order;
         }
-        return view('client.components.order-detail', compact('order_details'));
+        return view('client.components.order_detail', compact('order_details'));
     }
 
     /**
