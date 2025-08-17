@@ -13,7 +13,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
                             @if ($first->status === 'shipping')
-                                <span class="order-status"><i class="bi bi-truck"></i>
+                                <span class="order-status text-warning"><i class="bi bi-truck"></i>
                                     Đơn hàng đang vận chuyển đến bạn
                                 </span>
                             @elseif($first->status === 'completed')
@@ -22,11 +22,11 @@
                                 </span>
                                 <span class="text-danger fw-bold ms-2">HOÀN THÀNH</span>
                             @elseif($first->status === 'pending')
-                                <span class="order-status"><i class="bi bi-truck"></i>
+                                <span class="order-status text-secondary"><i class="bi bi-truck"></i>
                                     Đơn hàng đang xử lý
                                 </span>
                             @else
-                                <span class="order-status"><i class="bi bi-truck"></i>
+                                <span class="order-status text-danger"><i class="bi bi-truck"></i>
                                     Đơn hàng đã bị huỷ
                                 </span>
                             @endif
