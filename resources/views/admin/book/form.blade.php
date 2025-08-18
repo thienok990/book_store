@@ -44,7 +44,7 @@
 
     <div class="col-md-4">
         <label for="stock" class="form-label">Số lượng</label>
-        <input type="number" class="form-control" name="stock" id="stock" min="1"
+        <input type="number" class="form-control" name="stock" id="stock" min="0"
             value="{{ old('stock', $book->stock ?? '') }}" required>
     </div>
 

@@ -74,3 +74,30 @@
     background: #eee;
 }
 
+.ribbon-soldout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.ribbon-soldout span {
+    position: absolute;
+    top: 25px;
+    left: -45px;
+    transform: rotate(-45deg);
+    background: #dc3545; /* đỏ danger */
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 6px 0;
+    width: 180px; /* vừa khung, không quá dài */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}

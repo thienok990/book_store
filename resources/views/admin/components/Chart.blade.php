@@ -1,109 +1,98 @@
 @extends('admin.dashboard')
 @section('title-admin', 'Danh sách Sản phẩm')
+
 @section('content')
-    <!-- Content -->
     <div class="container-fluid p-4">
-        {{-- Thẻ thống kê --}}
-        <div class="row mb-4">
-            <div class="col-md-2">
-                <div class="card text-bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">Sản phẩm</h5>
-                        <h3>{{ $totalProducts ?? 0 }}</h3>
+
+        {{-- Thống kê nhanh --}}
+        <div class="row g-3 mb-3">
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="card text-bg-primary text-center shadow-sm rounded-3">
+                    <div class="card-body p-2">
+                        <h6>Sản phẩm</h6>
+                        <h4>{{ $totalProducts ?? 0 }}</h4>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="card text-bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">Đơn hàng</h5>
-                        <h3>{{ $totalOrders ?? 0 }}</h3>
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="card text-bg-success text-center shadow-sm rounded-3">
+                    <div class="card-body p-2">
+                        <h6>Đơn hàng tháng này</h6>
+                        <h4>{{ $totalOrders ?? 0 }}</h4>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="card text-bg-warning">
-                    <div class="card-body">
-                        <h5 class="card-title">Tổng doanh thu</h5>
-                        <h3>{{ number_format($totalRevenue ?? 0) }} đ</h3>
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="card text-bg-warning text-center shadow-sm rounded-3">
+                    <div class="card-body p-2">
+                        <h6>Tổng doanh thu</h6>
+                        <h4>{{ number_format($totalRevenue ?? 0) }} đ</h4>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="card text-bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">Đơn hàng hôm nay</h5>
-                        <h3>{{ $totalOrdersToday ?? 0 }}</h3>
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="card text-bg-info text-center shadow-sm rounded-3">
+                    <div class="card-body p-2">
+                        <h6>Đơn hàng hôm nay</h6>
+                        <h4>{{ $totalOrdersToday ?? 0 }}</h4>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="card text-bg-warning">
-                    <div class="card-body">
-                        <h5 class="card-title">Doanh thu hôm nay</h5>
-                        <h3>{{ number_format($todayRevenue ?? 0) }} đ</h3>
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="card text-bg-secondary text-center shadow-sm rounded-3">
+                    <div class="card-body p-2">
+                        <h6>Doanh thu hôm nay</h6>
+                        <h4>{{ number_format($todayRevenue ?? 0) }} đ</h4>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="card text-bg-danger">
-                    <div class="card-body">
-                        <h5 class="card-title">Khách hàng</h5>
-                        <h3>{{ $totalCustomers ?? 0 }}</h3>
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="card text-bg-danger text-center shadow-sm rounded-3">
+                    <div class="card-body p-2">
+                        <h6>Khách hàng</h6>
+                        <h4>{{ $totalCustomers ?? 0 }}</h4>
                     </div>
                 </div>
             </div>
         </div>
 
         {{-- Biểu đồ --}}
-        <div class="card mb-4">
-            <div class="card-header">Doanh thu theo tháng</div>
-            <div class="card-body">
-                <canvas id="salesChart" height="100"></canvas>
+        <div class="card mb-3 shadow-sm" style="height:44vh;">
+            <div class="card-header fw-bold">📈 Doanh thu theo tháng</div>
+            <div class="card-body p-2">
+                <canvas id="salesChart"
+                        data-months='@json($months ?? [])'
+                        data-revenues='@json($revenues ?? [])'
+                        height="300"></canvas>
             </div>
         </div>
 
         {{-- Đơn hàng mới --}}
-        <div class="card">
-            <div class="card-header">Đơn hàng mới nhất</div>
-            <ul class="list-group list-group-flush">
-                @forelse($recentOrders as $order)
-                    <li class="list-group-item">
-                        <strong>Mã:</strong> {{ $order->id }} |
-                        <strong>Khách:</strong> {{ $order->name }} |
-                        <strong>Tổng:</strong> {{ number_format($order->total_price) }} đ
-                    </li>
-                @empty
-                    <li class="list-group-item text-muted">Không có đơn hàng mới.</li>
-                @endforelse
-            </ul>
+        <div class="card shadow-sm" style="height:35%;">
+            <div class="card-header fw-bold">🛒 Đơn hàng mới nhất</div>
+            <div class="card-body p-0 d-flex flex-column">
+                <ul class="list-group list-group-flush flex-grow-1">
+                    @forelse($recentOrders as $order)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>#{{ $order->id }}</strong> - {{ $order->name }}
+                                <span class="text-muted">({{ number_format($order->total_price) }} đ)</span>
+                            </div>
+                            <div class="mt-1 small text-muted">
+                                🕒 Tạo: {{ $order->created_at->timezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i') }} |
+                                🔄 Cập nhật: {{ $order->updated_at->timezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i') }}
+                            </div>
+                        </li>
+                    @empty
+                        <li class="list-group-item text-muted">Không có đơn hàng mới.</li>
+                    @endforelse
+                </ul>
+            </div>
         </div>
-    </div>
+        {{ $recentOrders->appends(request()->query())->links('pagination::bootstrap-5') }}
     </div>
 @endsection
 
 @section('js')
-    @if (session('success'))
-        <script>
-            alert("{{ session('success') }}");
-        </script>
-    @endif
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: @json($months ?? []),
-                datasets: [{
-                    label: 'Doanh thu',
-                    data: @json($revenues ?? []),
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.3,
-                    fill: false
-                }]
-            }
-        });
-    </script>
-
+    @vite(['resources/js/chart.js'])
 @endsection

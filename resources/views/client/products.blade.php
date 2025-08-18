@@ -22,13 +22,23 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product-card h-100 p-2">
                                 <div class="position-relative">
-                                    <img src="{{ asset('storage/' . $book->img) }}" alt="{{ $book->name }}" loading="lazy"/>
+                                    <img src="{{ asset('storage/' . $book->img) }}" alt="{{ $book->name }}"
+                                        loading="lazy" />
+
+                                    @if ($book->stock === 0)
+                                        <div class="ribbon-soldout">
+                                            <span>HẾT HÀNG</span>
+                                        </div>
+                                    @endif
+
                                     <div class="product-overlay">
-                                        <a href="{{ route('index.show', parameters: ['id' => $book->book_id, 'slug' => $book->slug]) }}"
+                                        <a href="{{ route('index.show', ['id' => $book->book_id, 'slug' => $book->slug]) }}"
                                             style="text-decoration: none">👁️</a>
-                                        <button type="submit" class="btnAdd" data-id="{{ $book->book_id }}">🛒</button>
+                                        <button type="submit" class="btnAdd" data-id="{{ $book->book_id }}"
+                                            @if ($book->stock === 0) disabled @endif>🛒</button>
                                     </div>
                                 </div>
+
                                 <div class="product-title" style="font-size: 0.9rem; line-height: 1.2;">
                                     {{ $book->name }}
                                 </div>

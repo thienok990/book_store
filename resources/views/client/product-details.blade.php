@@ -1,4 +1,7 @@
 @extends('index')
+@section('css')
+    @vite(['resources/css/product-detail.css'])
+@endsection
 @section(section: 'title', content: 'Chi tiết sản phẩm')
 @section('body')
     <div class="container py-5">
@@ -6,10 +9,19 @@
             <div class="col-lg-10">
                 <div class="row g-4 shadow-sm p-4 rounded bg-white">
                     <!-- Cột hình ảnh -->
-                    <div class="col-md-5 text-center">
-                        <img src="{{ asset('storage/' . $book->img) }}" alt="Bìa sách" loading="lazy"
-                            class="img-fluid rounded shadow-sm mb-3">
-                        <div class="text-danger fw-bold fs-4">
+                    <div class="col-md-5 text-center position-relative">
+                        <div class="position-relative d-inline-block">
+                            <img src="{{ asset('storage/' . $book->img) }}" alt="Bìa sách" loading="lazy"
+                                class="img-fluid rounded shadow-sm mb-3">
+
+                            @if ($book->stock === 0)
+                                <div class="overlay-soldout">
+                                    <span>❌ HẾT HÀNG ❌</span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="text-danger fw-bold fs-4 mt-2">
                             {{ number_format($book->price, 0, ',', '.') }} đ
                         </div>
                     </div>
@@ -33,7 +45,8 @@
                         </div>
                         <!-- Hành động -->
                         <div class="d-flex gap-3">
-                            <button type="submit" class="btn btn-dark px-4 btnAdd" data-id="{{$book->book_id}}">🛒 Thêm vào giỏ</button>
+                            <button type="submit" class="btn btn-dark px-4 btnAdd" data-id="{{ $book->book_id }}"
+                                @if ($book->stock === 0) disabled @endif>🛒 Thêm vào giỏ</button>
                         </div>
                     </div>
                 </div>

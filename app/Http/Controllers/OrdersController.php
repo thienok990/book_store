@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Cart;
 use App\Models\OrderDetail;
 use App\Models\Orders;
@@ -99,7 +100,8 @@ class OrdersController extends Controller
             'name' => $fullName,
             'email' => $email,
             'total_price' => $total_price,
-            'status' => 'pending'
+            'status' => 'pending',
+            'created_at' => now(),
         ]);
         foreach ($cart_items as $item) {
             OrderDetail::create([
@@ -110,6 +112,7 @@ class OrdersController extends Controller
                 'total' => $item->price * (float)$item->quantity
             ]);
             Cart::where('user_id',  Auth::id())->where('book_id', $item->book_id)->delete();
+            Book::where('id', $item->book_id)->decrement('stock', $item->quantity);
         }
         return redirect()->route('index.index')->with('success', 'Bạn đã đặt hàng thành công');
     }
@@ -176,6 +179,7 @@ class OrdersController extends Controller
     {
         $order = Orders::find($id);
         $order->status = $request->status;
+        $order->updated_at = now();
         $order->save();
         return redirect()->route('orders.indexAdmin')->with('success', 'Bạn đã cập nhật đơn hàng thành công');
     }

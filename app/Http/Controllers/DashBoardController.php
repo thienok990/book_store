@@ -14,17 +14,34 @@ class DashBoardController extends Controller
      */
     public function index()
     {
+        // Doanh thu theo tháng trong năm hiện tại
+        $revenuesByMonth = Orders::selectRaw('MONTH(created_at) as month, SUM(total_price) as revenue')
+            ->whereYear('created_at', now()->year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('revenue', 'month')
+            ->toArray();
+
+        // Tạo mảng 12 tháng (1-12), nếu tháng nào không có doanh thu thì gán = 0
+        $months = range(1, 12);
+        $revenues = [];
+        foreach ($months as $m) {
+            $revenues[] = $revenuesByMonth[$m] ?? 0;
+        }
+
         return view('admin.components.chart', [
-        'totalProducts' => Book::count(),
-        'totalOrders' => Orders::count(), 
-        'totalRevenue' => Orders::sum('total_price'),
-        'todayRevenue' => Orders::whereDate('created_at', today())->sum('total_price'),
-        'totalOrdersToday' => Orders::whereDate('created_at', today())->count(),
-        'totalCustomers' => User::count(),
-        'recentOrders' => Orders::latest()->take(5)->get(),
-        'months' => ['1','2','3','4','5'], // tháng
-        'revenues' => [500000, 700000, 300000, 900000, 1200000] // dữ liệu doanh thu
-    ]);
+            'totalProducts' => Book::count(),
+            'totalOrders' => Orders::whereMonth('created_at', now()->month)
+                ->whereYear('created_at', now()->year)
+                ->count(),
+            'totalRevenue' => Orders::sum('total_price'),
+            'todayRevenue' => Orders::whereDate('created_at', today())->sum('total_price'),
+            'totalOrdersToday' => Orders::whereDate('created_at', today())->count(),
+            'totalCustomers' => User::count(),
+            'recentOrders' => Orders::latest()->take(5)->paginate(5),
+            'months' => $months,
+            'revenues' => $revenues,
+        ]);
     }
 
     /**
