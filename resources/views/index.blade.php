@@ -88,7 +88,7 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{{ route('user.show') }}">Thông tin cá nhân</a></li>
-                                <li><a class="dropdown-item" href="{{route('cart.show')}}">Giỏ hàng</a></li>
+                                <li><a class="dropdown-item" href="{{ route('cart.show') }}">Giỏ hàng</a></li>
                                 <li><a class="dropdown-item" href="{{ route('user.logout') }}">Đăng xuất</a></li>
                                 @if (auth()->user()->isAdmin())
                                     <li><a class="dropdown-item" href="{{ route('dashboard.index') }}">Tới trang quản
@@ -143,18 +143,20 @@
     <!-- Bootstrap Bundle 5.3.3 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
+    @vite(['resources/js/app.js'])
 
-    <!-- Hiển thị thông báo -->
-    @if (session('success'))
-        <script>
-            alert(@json(session('success')));
-        </script>
-    @endif
-    @if (session('error'))
-        <script>
-            alert(@json(session('error')));
-        </script>
-    @endif
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if (session('success'))
+                showAlert(@json(session('success')), 'success');
+            @endif
+
+            @if (session('error'))
+                showAlert(@json(session('error')), 'error');
+            @endif
+        });
+    </script>
+
 
     <!-- Tự động mở modal nếu có session -->
     @if (session('login'))

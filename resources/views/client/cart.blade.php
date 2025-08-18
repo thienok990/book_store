@@ -29,7 +29,9 @@
                                         <div class="d-flex align-items-center">
                                             <input type="number" class="form-control me-3 quantity"
                                                 name="quantity[{{ $item->id }}]" id="quantity-{{ $item->id }}"
-                                                value="{{ $item->quantity }}" min="1" style="width: 60px;">
+                                                value="{{ $item->quantity }}" min="1" max="{{ $item->stock }}"
+                                                style="width: 60px;"
+                                                oninput="if(this.value > this.max) this.value = this.max;">
 
                                             <strong class="me-3 text-primary total-price"
                                                 id="total-price{{ $item->id }}">
@@ -62,7 +64,7 @@
                                     <strong id="cart-total">0đ</strong>
                                 </li>
                             </ul>
-                            <button class="btn btn-primary w-100" id="btn" disabled >Đặt Hàng</button>
+                            <button class="btn btn-primary w-100" id="btn" disabled>Đặt Hàng</button>
                         </div>
                     </div>
                 </div>
@@ -72,4 +74,5 @@
 @endsection
 @section('js')
     @vite(['resources/js/cart.js'])
+    @vite(['resources/js/quantity.js'])
 @endsection

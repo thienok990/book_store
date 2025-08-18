@@ -64,6 +64,6 @@
     </div>
 @endsection
 @section('js')
-    @vite(['resources/js/cart.js'])
+    @vite(['resources/js/product-details.js'])
     @vite(['resources/js/filter.js'])
 @endsection

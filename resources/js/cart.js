@@ -2,6 +2,7 @@ $(document).ready(function () {
     $("input[type='number']").on("change", function () {
         const val = $(this).val(); // Số lượng
         const id = $(this).attr("id").replace("quantity-", ""); // Lấy id mà không cần phần "quantity-" trước đó
+        
         const price = parseInt(
             $("#price" + id)
                 .text()
@@ -84,30 +85,6 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 console.log("Error:", xhr.responseText);
-            },
-        });
-    });
-    $(".btnAdd").on("click", function () {
-        const id = $(this).data("id"); // Lấy ID từ nút Add
-        let totalQuantity = parseInt($(".total-quantity").text(), 10);
-        let quantity = $("input[name='quantity']").val();
-        if (!quantity || isNaN(quantity) || quantity <= 0) {
-            quantity = 1;
-        }
-        $.ajax({
-            url: "http://localhost:8000/cart/add/" + id, // Địa chỉ URL add
-            method: "POST", // Phương thức Add
-            data: { quantity: quantity },
-            headers: {
-                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content"), // Gửi CSRF token
-            },
-            success: function (response) {
-                $(".total-quantity").text(totalQuantity + 1); // Cập nhật số lượng giỏ hàng
-                alert("Thêm vào giỏ hàng thành công!"); // Thông báo thành công
-                $("input[name='quantity']").val(1); // Đặt lại số lượng về 1
-            },
-            error: function (xhr) {
-                console.log("Error:", xhr.responseText); // Lỗi
             },
         });
     });

@@ -40,7 +40,7 @@
                             <label class="form-label fw-semibold">Số lượng:</label>
                             <div class="input-group" style="max-width: 160px;">
                                 <input type="number" class="form-control text-center" value="1" min="1"
-                                    name="quantity">
+                                    name="quantity" max="{{ $book->stock }}">
                             </div>
                         </div>
                         <!-- Hành động -->
@@ -55,5 +55,6 @@
     </div>
 @endsection
 @section('js')
-    @vite(['resources/js/cart.js'])
+    @vite(['resources/js/product-details.js'])
+    @vite(['resources/js/quantity.js'])
 @endsection

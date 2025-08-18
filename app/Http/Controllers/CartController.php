@@ -33,24 +33,31 @@ class CartController extends Controller
     public function add(Request $request, $id)
     {
         if (!Auth::check()) {
-            return redirect()->route('index.index')->with('error', 'Bạn phải đăng nhập!');
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Bạn phải đăng nhập!'
+            ], 200);
         }
+        $book = Book::findOrFail($id);
         $request->validate([
-            'quantity' => 'integer|min:1',
+            'quantity' => 'required|integer|min:1|max:' . $book->stock,
         ]);
-        if (request()->segment(1) == "cart") {
-            $quantity = $request->quantity;
-        }
+
+        $quantity = $request->quantity;
         $item = Cart::where('user_id', Auth::id())
             ->where('book_id', $id)
             ->first();
         if ($item) {
-            $item->increment('quantity', $quantity);
+            if ($item->quantity + $quantity > $book->stock) {
+                $item->update(['quantity' => $book->stock]);
+            } else {
+                $item->increment('quantity', $quantity);
+            }
         } else {
             Cart::create([
                 'user_id' => Auth::id(),
                 'book_id' => $id,
-                'quantity' => $quantity,
+                'quantity' => min($quantity, $book->stock),
             ]);
         }
         return response()->json([
@@ -73,9 +80,10 @@ class CartController extends Controller
                 'book.price',
                 'cart.quantity',
                 'book.img',
+                'book.stock',
             )
             ->where('user_id', Auth::id())
-             ->get() ?? collect();
+            ->get() ?? collect();
         $total_price = 0;
         foreach ($cart_items as $item) {
             $total_price += (float)$item->quantity * $item->price;
