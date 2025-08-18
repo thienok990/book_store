@@ -22,6 +22,7 @@
                 <li class="nav-item"><a href="{{ route('orders.indexAdmin') }}" class="nav-link text-white">Đơn hàng</a>
                 </li>
                 <li class="nav-item"><a href="#" class="nav-link text-white">Khách hàng</a></li>
+                <li class="nav-item"><a href="{{ route('user.logout') }}" class="nav-link text-white">Đăng xuất</a></li>
             </ul>
         </div>
 
