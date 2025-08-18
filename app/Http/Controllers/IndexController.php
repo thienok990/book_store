@@ -72,7 +72,11 @@ class IndexController extends Controller
                 'author.name as author_name',
                 'category.name as category_name'
             )->where('book.id', $id)->first();
-        return view('client.product-details', compact('book'));
+        $bookRecommends = Book::where('id', '!=', $id)
+            ->inRandomOrder()
+            ->take(18)
+            ->get();
+        return view('client.product-details', compact('book', 'bookRecommends'));
     }
 
     /**

@@ -4,7 +4,7 @@
 @endsection
 @section(section: 'title', content: 'Chi tiết sản phẩm')
 @section('body')
-    <div class="container py-5">
+    <div class="py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="row g-4 shadow-sm p-4 rounded bg-white">
@@ -52,7 +52,11 @@
                 </div>
             </div>
         </div>
+        <div class="mt-5">
+            @include('client.components.carousel', ['books' => $bookRecommends])
+        </div>
     </div>
+
 @endsection
 @section('js')
     @vite(['resources/js/product-details.js'])

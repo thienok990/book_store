@@ -60,7 +60,6 @@
                 @include('client.components.filter', ['categories' => $categories, 'authors' => $authors])
             </div>
         </div>
-
     </div>
 @endsection
 @section('js')
