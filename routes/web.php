@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'show'])->name('cart.show')->withoutMiddleware('auth');
     Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-    Route::get('cart/checkout', [OrdersController::class, 'index'])->name('checkout.index');
+    Route::get('cart/checkout', [OrdersController::class, 'index'])->name('checkout.index')->withoutMiddleware('auth');
     Route::post('cart/checkout', [OrdersController::class, 'store'])->name('checkout.store');
     Route::get('user/order', [OrdersController::class, 'show'])->name('order.show');
     Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');

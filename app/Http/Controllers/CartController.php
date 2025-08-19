@@ -30,39 +30,9 @@ class CartController extends Controller
         //
     }
 
-    public function add(Request $request, $id)
+    public function add(Request $request)
     {
-        if (!Auth::check()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Bạn phải đăng nhập!'
-            ], 200);
-        }
-        $book = Book::findOrFail($id);
-        $request->validate([
-            'quantity' => 'required|integer|min:1|max:' . $book->stock,
-        ]);
-
-        $quantity = $request->quantity;
-        $item = Cart::where('user_id', Auth::id())
-            ->where('book_id', $id)
-            ->first();
-        if ($item) {
-            if ($item->quantity + $quantity > $book->stock) {
-                $item->update(['quantity' => $book->stock]);
-            } else {
-                $item->increment('quantity', $quantity);
-            }
-        } else {
-            Cart::create([
-                'user_id' => Auth::id(),
-                'book_id' => $id,
-                'quantity' => min($quantity, $book->stock),
-            ]);
-        }
-        return response()->json([
-            'message' => 'Item Added successfully'
-        ]);
+        return $this->addToCart($request->quantity, $request->id);
     }
 
     /**
@@ -134,6 +104,38 @@ class CartController extends Controller
 
         return response()->json([
             'message' => 'Item deleted successfully'
+        ]);
+    }
+
+     public function addToCart($quantity, $id)
+    {
+        if (!Auth::check()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Bạn phải đăng nhập!'
+            ], 200);
+        }
+        $book = Book::findOrFail($id);
+        $item = Cart::where('user_id', Auth::id())
+            ->where('book_id', $id)
+            ->first();
+        if ($item) {
+            if ($item->quantity + $quantity > $book->stock) {
+                $item->update(['quantity' => $book->stock]);
+            } else {
+                $item->increment('quantity', $quantity);
+            }
+        } else {
+            Cart::create([
+                'user_id' => Auth::id(),
+                'book_id' => $id,
+                'quantity' => min($quantity, $book->stock),
+            ]);
+        }
+        $totalQuantity = Cart::where('user_id', Auth::id())->distinct('book_id')->count();
+        return response()->json([
+            'message' => 'Item Added successfully',
+            'totalQuantity' => $totalQuantity
         ]);
     }
 }

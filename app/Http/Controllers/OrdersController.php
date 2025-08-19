@@ -13,27 +13,24 @@ use Illuminate\Support\Facades\Http;
 
 class OrdersController extends Controller
 {
+    private $cartController;
+
+    public function __construct(CartController $cartController)
+    {
+        $this->cartController = $cartController;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $cart_items = Cart::join('book', 'book.id', '=', 'cart.book_id')
-            ->select(
-                'cart.book_id as id',
-                'book.name',
-                'book.price',
-                'cart.quantity',
-            )
-            ->whereIn("cart.book_id", $request->ids)
-            ->where('user_id', Auth::id())
-            ->get();
-
-        $total_price = 0;
-        foreach ($cart_items as $item) {
-            $total_price += (float)$item->quantity * $item->price;
+        if (!Auth::check()) {
+            return back()->with('error', 'Bạn phải đăng nhập!');
         }
-        return view('client.checkout', compact('cart_items', 'total_price'));
+        if ($request->has('book_id')) {
+            return $this->orderNow($request);
+        }
+        return $this->order($request);
     }
 
     /**
@@ -182,5 +179,45 @@ class OrdersController extends Controller
         $order->updated_at = now();
         $order->save();
         return redirect()->route('orders.indexAdmin')->with('success', 'Bạn đã cập nhật đơn hàng thành công');
+    }
+
+    private function order(Request $request)
+    {
+        $cart_items = Cart::join('book', 'book.id', '=', 'cart.book_id')
+            ->select(
+                'cart.book_id as id',
+                'book.name',
+                'book.price',
+                'cart.quantity',
+            )
+            ->whereIn("cart.book_id", $request->ids)
+            ->where('user_id', Auth::id())
+            ->get();
+
+        $total_price = 0;
+        foreach ($cart_items as $item) {
+            $total_price += (float)$item->quantity * $item->price;
+        }
+        return view('client.checkout', compact('cart_items', 'total_price'));
+    }
+
+    private function orderNow(Request $request)
+    {
+        $this->cartController->addToCart($request->quantity, $request->book_id);
+        $book = Book::findOrFail($request->book_id);
+        $cart_items = collect([
+            (object)[
+                'id' => $book->id,
+                'name' => $book->name,
+                'price' => $book->price,
+                'quantity' => $request->quantity,
+            ]
+        ]);
+
+        $total_price = 0;
+        foreach ($cart_items as $item) {
+            $total_price += (float)$item->quantity * $item->price;
+        }
+        return view('client.checkout', compact('cart_items', 'total_price'));
     }
 }

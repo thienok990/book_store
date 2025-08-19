@@ -33,7 +33,9 @@
 
                                     <div class="product-overlay">
                                         <a href="{{ route('index.show', ['id' => $book->book_id, 'slug' => $book->slug]) }}"
-                                            style="text-decoration: none">👁️</a>
+                                            style="text-decoration: none">
+                                            <button><i class="bi bi-book"></i></button>
+                                        </a>
                                         <button type="submit" class="btnAdd" data-id="{{ $book->book_id }}"
                                             @if ($book->stock === 0) disabled @endif>🛒</button>
                                     </div>

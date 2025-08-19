@@ -9,6 +9,7 @@
             <div class="col-lg-10">
                 <div class="row g-4 shadow-sm p-4 rounded bg-white">
                     <!-- Cột hình ảnh -->
+
                     <div class="col-md-5 text-center position-relative">
                         <div class="position-relative d-inline-block">
                             <img src="{{ asset('storage/' . $book->img) }}" alt="Bìa sách" loading="lazy"
@@ -39,7 +40,7 @@
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Số lượng:</label>
                             <div class="input-group" style="max-width: 160px;">
-                                <input type="number" class="form-control text-center" value="1" min="1"
+                                <input type="number" class="form-control text-center" value="1" min="1"form="checkoutForm"
                                     name="quantity" max="{{ $book->stock }}">
                             </div>
                         </div>
@@ -47,6 +48,11 @@
                         <div class="d-flex gap-3">
                             <button type="submit" class="btn btn-dark px-4 btnAdd" data-id="{{ $book->book_id }}"
                                 @if ($book->stock === 0) disabled @endif>🛒 Thêm vào giỏ</button>
+                            <form id="checkoutForm" action="{{ route('checkout.index') }}" method="get">
+                                <input type="hidden" name="book_id" value="{{ $book->book_id }}">
+                                <button type="submit" class="btn btn-primary px-4"
+                                    @if ($book->stock === 0) disabled @endif>Đặt Hàng</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -61,4 +67,11 @@
 @section('js')
     @vite(['resources/js/product-details.js'])
     @vite(['resources/js/quantity.js'])
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if (session('error'))
+                showAlert(@json(session('error')), 'error');
+            @endif
+        });
+    </script>
 @endsection

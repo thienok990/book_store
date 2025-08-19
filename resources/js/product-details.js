@@ -18,7 +18,7 @@ $(document).ready(function () {
                     showAlert("Bạn phải đăng nhập", "error"); // Hiển thị thông báo lỗi
                     return;
                 } else {
-                    $(".total-quantity").text(totalQuantity + 1);
+                    $(".total-quantity").text(response.totalQuantity);
                     showAlert("Thêm vào giỏ hàng thành công!");
                     $("input[name='quantity']").val(1);
                 }
